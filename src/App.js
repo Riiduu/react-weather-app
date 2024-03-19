@@ -21,12 +21,6 @@ function App() {
             </div>
             {/* Hourly forecast */}
             <div className="flex flex-row h-72 p-10 border-t-2 border-gray-600 justify-between">
-                <div className="b h-fit p-3 rounded-xl text-white bg-gray-500 bg-opacity-75">
-                    <div className="border-b-2 border-gray-500 text-lg">09:00</div>
-                    <div className="bg-gray-300 rounded-xl my-2 bg-opacity-35"><img src={rain} alt=""/></div>
-                    <div className="text-xl font-bold">9°C</div>
-                </div>
-
             </div>
         </div>
 
