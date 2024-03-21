@@ -1,29 +1,73 @@
 import './App.css';
 import rain from './assets/rainIcon.png'
-//import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import HourlyForecast from "./components/HourlyForecast";
+import {useEffect, useState} from "react";
+import Axios from "axios";
 function App() {
+    // Address
 
+    //Conditions
+
+    // Temperature
+
+    // Time
+
+    
+
+    // Getting Time
+    const getTime = (timezone) => {
+        let t = new Date().toLocaleTimeString({timeZone: timezone})
+
+        // (time => t)
+    }
+
+    const fetchData = (location) => {
+        Axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=M7H59YF4LJWGQYZRWRXHGHH4K`)
+            .then((res) => {
+                console.log(res.data)
+
+
+
+                setData(address => res.data.address)
+                setData(conditions => res.data.currentConditions.conditions)
+                setData(temperature => res.data.currentConditions.temp)
+                // Set up time
+                setData(time => getTime("Europe/London"))
+
+            })
+    }
+
+    useEffect(() => {
+        fetchData("Rauma")
+    }, []);
   return (
-
     <div className="flex flex-row h-dvh w-dvw bg-rainy-bg bg-opacity-75 text-center">
         {/* Left side / Main container */}
         <div className="flex h-dvh flex-col justify-between w-3/4">
             <div className="flex flex-col h-dvh p-10 justify-between text-right">
                 {/* top text - date & time */}
-                <h2 className="text-2xl text-white">21 April 2024 <span className="text-gray-500">|</span> 11:00</h2>
+                <h2 className="text-2xl text-white">Last updated: DATE <span className="text-gray-300">|</span> TIME</h2>
                 {/* bottom text */}
                 <div>
-                    <h1 className="text-4xl text-white">Helsinki</h1>
-                    <h1 className="text-8xl text-white">Rainy</h1>
+                    <h1 className="text-4xl text-white">ADDRESS</h1>
+                    <h1 className="text-8xl text-white">CONDITIONS</h1>
                 </div>
 
             </div>
             {/* Hourly forecast */}
-            <div className="flex flex-row h-72 p-10 border-t-2 border-gray-600 justify-between">
+            <div className="flex flex-row h-72 p-10 border-t-2 border-gray-600 justify-center">
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
+                <HourlyForecast time="09:00" img={rain} temperature="9°C" />
             </div>
         </div>
-
         {/* Sidebar */}
         <div
             className="w-1/4 border-l-2 border-gray-600 bg-gray-500 bg-opacity-40 p-10 text-white text-lg backdrop-blur-sm">
@@ -33,15 +77,14 @@ function App() {
                 <div className="flex border-2 border-gray-500 rounded-2xl px-1">
                     <i className="m-auto">📍</i>
                     <input className="text-white bg-transparent p-2 flex-1 focus:outline-0" placeholder="City Name" type="text"/>
-                    <i className="cursor-pointer my-auto mr-3">🔍</i>
                 </div>
                 {/* Temperature */}
-                    <h1 className="text-8xl my-5">30°C</h1>
+                    <h1 className="text-8xl my-5">30°F</h1>
                 {/* Wind */}
                 <div className="flex align-middle justify-center">
                     <img width="20" height="20" src="https://img.icons8.com/ios/100/FFFFFF/air-element.png"
                          alt="air-element"/>
-                    <h3 className="text-gray-300 text-lg ml-2">Northeast, 30m/s</h3>
+                    <h3 className="text-gray-300 text-lg ml-2">Northeast, 3m/s</h3>
                 </div>
 
             </div>
